@@ -1,0 +1,25 @@
+{
+  "name": "dvm-backend",
+  "version": "1.0.0",
+  "description": "backend for the mobile app of DVM project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalabYibeltal/DVM-backend.git"
+  },
+  "author": "kalab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalabYibeltal/DVM-backend/issues"
+  },
+  "homepage": "https://github.com/kalabYibeltal/DVM-backend#readme",
+  "dependencies": {
+    "mongodb": "^5.3.0",
+    "mongoose": "^7.0.4"
+  }
+}
