@@ -1,4 +1,4 @@
-const { ObjectId } = require('bson')
+
 const mongoose = require('mongoose')
 
 // interface item {
@@ -10,15 +10,13 @@ const vmSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please enter the name of your car'],
-        maxlength: [15, 'maximum character is 15']
+        maxlength: [35, 'maximum character is 15']
     },
-    id:{
-        type: String,
-        required: [true, 'Please enter the plate number'],
-        length: 6
+    numberofitems:{
+        type: Number
     },
     items:{
-        type: List,
+        type: Map,
         required: [true, "Please enter the car model"],
       
     },

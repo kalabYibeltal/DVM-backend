@@ -4,7 +4,8 @@ const userController = require('../controllers/userController')
 
 const router = Router()
 
-// router.get('/balance/:id', userController.balance_get)
+router.get('/balance/:id', userController.balance_get)
+router.post('/updatebalance', userController.updatebalance_post)
 router.post('/signup', userController.signup_post)
 router.post('/login', userController.login_post)
 

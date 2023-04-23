@@ -70,10 +70,23 @@ module.exports.login_post = async (req, res)=>{
     }
 }
 
-// module.exports.balance_get = (req, res) =>{
-//     User.findById(req.params.id)
-//         .then((result)=>{
-//             res.status(201).json(result.balance)
-//         })
-//         .catch((err)=>console.log(err))
-// }
+module.exports.balance_get = (req, res) =>{
+    User.findById(req.params.id)
+        .then((result)=>{
+            res.status(201).json(result)
+        })
+        .catch((err)=>console.log(err))
+}
+
+
+module.exports.updatebalance_post = async (req, res)=>{
+    const {userid, newbalance} = req.body
+
+    User.findByIdAndUpdate(userid, {balance: newbalance})
+    .then(()=>res.status(201).json({message: "success"}))
+    .catch((err)=>console.log(err))
+}
+
+// to be made
+// password change
+// add balance
