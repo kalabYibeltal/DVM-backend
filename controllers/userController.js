@@ -69,3 +69,11 @@ module.exports.login_post = async (req, res)=>{
         
     }
 }
+
+// module.exports.balance_get = (req, res) =>{
+//     User.findById(req.params.id)
+//         .then((result)=>{
+//             res.status(201).json(result.balance)
+//         })
+//         .catch((err)=>console.log(err))
+// }

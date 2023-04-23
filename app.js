@@ -8,7 +8,7 @@ const userRoutes = require('./routes/userRoutes')
 
 
 //connect to db
-const dbURI = "mongodb+srv://kalab-mike:kalab@kalab-mike.zbrvyqp.mongodb.net/?retryWrites=true&w=majority";
+const dbURI = "mongodb+srv://kalab-mike:kalab@kalab-mike.zbrvyqp.mongodb.net/DVM-database?retryWrites=true&w=majority";
 
 const app = express()
 app.use(cors())

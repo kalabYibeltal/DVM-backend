@@ -25,9 +25,7 @@ const userSchema = new mongoose.Schema({
         minlength: [6, 'minimum password length is 6']
     },
     balance:{
-        type: {
-            type: Number,
-          },
+        type: Number
     },
  
 })
