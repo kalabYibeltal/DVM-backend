@@ -1,10 +1,5 @@
-
 const mongoose = require('mongoose')
 
-// interface item {
-//     name
-//     count
-// } 
 
 const vmSchema = new mongoose.Schema({
     name: {
@@ -19,6 +14,19 @@ const vmSchema = new mongoose.Schema({
         type: Map,
         required: [true, "Please enter the car model"],
       
+    },
+    city:{
+        type: String,
+        required: [true, 'Please enter the name of your car'],
+        maxlength: [35, 'maximum character is 15']
+    },
+    building:{
+        type: String,
+        required: [true, 'Please enter the name of your car'],
+        maxlength: [35, 'maximum character is 15']
+    },
+    income:{
+        type: Number
     },
     
 })
