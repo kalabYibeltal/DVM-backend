@@ -8,6 +8,8 @@ const router = Router()
 router.post('/createmachine_post', vmController.createmachine_post)
 router.post('/buyitem_post', vmController.buyitem_post)
 router.post('/restockitem_post', vmController.restockitem_post)
+router.post('/restockitem_post', vmController.restockitem_post)
+router.post('/machinelogin', vmController.machinelogin)
 
 
 module.exports = router

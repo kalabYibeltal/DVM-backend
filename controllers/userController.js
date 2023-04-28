@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const { findById } = require('../models/vmachine')
 
 //handle errors
 const handleErrors = (err)=>{
@@ -70,17 +71,21 @@ module.exports.login_post = async (req, res)=>{
     }
 }
 
-module.exports.balance_get = (req, res) =>{
-    User.findById(req.params.id)
+
+
+module.exports.balance_post = (req, res) =>{
+    const id = req.body.id
+    User.findById(id)
         .then((result)=>{
-            res.status(201).json(result)
+            res.status(201).json(result.balance)
         })
-        .catch((err)=>console.log(err))
+        .catch((err)=>console.log("error"))
 }
 
 
 module.exports.updatebalance_post = async (req, res)=>{
     const {userid, newbalance} = req.body
+    // const user = await findById(userid)
 
     User.findByIdAndUpdate(userid, {balance: newbalance})
     .then(()=>res.status(201).json({message: "success"}))

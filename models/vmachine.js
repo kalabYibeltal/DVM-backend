@@ -31,5 +31,15 @@ const vmSchema = new mongoose.Schema({
     
 })
 
+vmSchema.statics.login = async function(name) {
+    const machine = await this.findOne({ name })
+    
+    if (machine){
+        return machine
+    }
+    throw Error('Unregisterd Vending Machine')
+}
+
+
 const Vm = mongoose.model('vm', vmSchema)
 module.exports = Vm
