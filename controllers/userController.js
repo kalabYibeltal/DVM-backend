@@ -43,14 +43,13 @@ module.exports.signup_post = async (req, res)=>{
     const balance = 0;
     
     try{
-        const user = await User.create({ name,email, password, phoneNumber, balance})
-        //add the session key here
+        const user = await User.create({name, email, password, phoneNumber, balance})
         res.status(201).json({ user: user })
 
     }catch(err){
         const errors = handleErrors(err)
         res.status(400).json({errors})
-        // console.log(err)
+        console.log(err)
     }
 }
 
