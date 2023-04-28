@@ -65,7 +65,7 @@ module.exports.machinelogin = async (req, res)=>{
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         res.status(200).json({ token: token, machine: machine})
     }catch(err){
-        console.log(errors)
+        // console.log(errors)
         res.status(400).json({ errors: err.message })
         
     }
