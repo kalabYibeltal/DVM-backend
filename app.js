@@ -5,6 +5,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const userRoutes = require('./routes/userRoutes')
 const vmRoutes = require('./routes/vmRoutes')
+const adminRoutes = require('./routes/adminRoutes')
 
 
 
@@ -29,5 +30,6 @@ app.use(cookieParser())
 app.get('/isconnected', (req, res)=>res.status(200).json({msg: "server online"}))
 app.use(userRoutes)
 app.use('/vmachine', vmRoutes)
+app.use('/admin', adminRoutes)
 
 app.use((req, res) => res.status(400).json({msg: "wrong endpoint"}))
