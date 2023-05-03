@@ -10,6 +10,7 @@ router.post('/buyitem_post', vmController.buyitem_post)
 router.post('/restockitem_post', vmController.restockitem_post)
 router.post('/restockitem_post', vmController.restockitem_post)
 router.post('/machinelogin', vmController.machinelogin)
+router.get('/getall', vmController.getall)
 
 
 module.exports = router

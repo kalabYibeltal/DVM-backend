@@ -77,6 +77,23 @@ module.exports.machinelogin = async (req, res)=>{
     }
 }
 
+module.exports.getall = async (req, res)=>{
+    const {name} = req.body
+
+    try {
+        console.log("here")
+        let machines = await Vm.find({})
+        console.log(machines)
+        res.status(200).json({ message: "Machines fetched", machines })
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: error })
+        
+    }
+}
+
+
+
 // to be made
 // password change
 // add balance
