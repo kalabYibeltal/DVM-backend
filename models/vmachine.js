@@ -4,25 +4,27 @@ const mongoose = require('mongoose')
 const vmSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please enter the name of your car'],
-        maxlength: [35, 'maximum character is 15']
+        required: [true, 'Please enter the name of the machine'],
+        maxlength: [35, 'maximum character is 15'],
+        unique: [true, "Please enter a unique machine name"]
     },
     numberofitems:{
-        type: Number
+        type: Number,
+        required: [true, "Please enter the number of items"],
     },
     items:{
         type: Map,
-        required: [true, "Please enter the car model"],
+        required: [true, "Please enter the items"],
       
     },
     city:{
         type: String,
-        required: [true, 'Please enter the name of your car'],
+        required: [true, 'Please enter the city of the machine'],
         maxlength: [35, 'maximum character is 15']
     },
     building:{
         type: String,
-        required: [true, 'Please enter the name of your car'],
+        required: [true, 'Please enter the building of the machine'],
         maxlength: [35, 'maximum character is 15']
     },
     income:{

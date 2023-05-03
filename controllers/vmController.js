@@ -11,17 +11,20 @@ const createToken = (id)=>{
 
 
 module.exports.createmachine_post = async (req, res)=>{
-    const {name, numberofitems, items, city, building} = req.body;
-    const temp = {};
-    // for (i=0, i<)
-    // const income = 0;
+    let {name, numberofitems, items, city, building} = req.body;
+    let temp = {};
+    for (let {name, price, stock} of items){
+        temp[name] = {"price":Number(price), "stock": Number(stock)}
+    }
+    items = temp
+    const income = 0;
     try{
         const machine = await Vm.create({ name, numberofitems,items, city, building,income})
         res.status(201).json({ machine })
 
     }catch(err){
         console.log(err)
-        res.status(400).json(req.body)
+        res.status(400).json(err)
     }
 }
 
