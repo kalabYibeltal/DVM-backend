@@ -13,7 +13,11 @@ const adminRoutes = require('./routes/adminRoutes')
 const dbURI = "mongodb+srv://kalab-mike:kalab@kalab-mike.zbrvyqp.mongodb.net/DVM-database?retryWrites=true&w=majority";
 
 const app = express()
-app.use(cors())
+app.use(cors({
+	origin: true,
+	credentials: true,
+	exposedHeaders: ["token"]
+}))
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => console.log('Connected to database'))
