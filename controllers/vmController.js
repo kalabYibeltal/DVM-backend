@@ -78,8 +78,7 @@ module.exports.machinelogin = async (req, res)=>{
 }
 
 module.exports.getall = async (req, res)=>{
-    const {name} = req.body
-
+ 
     try {
         console.log("here")
         let machines = await Vm.find({})

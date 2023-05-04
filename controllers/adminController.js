@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken')
 const Admin = require('../models/admin')
 const { findById } = require('../models/admin')
+const Vm = require('../models/vmachine')
+const User = require('../models/user')
 
 //handle errors
 const handleErrors = (err)=>{
@@ -69,3 +71,40 @@ module.exports.adminlogin_post = async (req, res)=>{
     }
 }
 
+module.exports.machinedata = async (req, res)=>{
+    try {
+        let income = 0;
+        let vmachines = await Vm.find({})
+        const machines = vmachines.length;
+        for (let machine of vmachines){
+            income += machine.income
+        }
+
+        res.status(200).json({ income, machines })
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: error })
+        
+    }
+}
+
+module.exports.userdata = async (req, res)=>{
+    try {
+        let customersbalance = 0;
+        let users = await User.find({})
+        console.log(users)
+        const customers = users.length;
+        console.log(customers)
+        for (let user of users){
+            customersbalance += user.balance
+        }
+
+        res.status(200).json({ customersbalance, customers })
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: error })
+        
+    }
+}
