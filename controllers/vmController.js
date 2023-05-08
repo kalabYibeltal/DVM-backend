@@ -93,6 +93,21 @@ module.exports.getall = async (req, res)=>{
 
 
 
+module.exports.getone = async (req, res)=>{
+ 
+    try {
+        console.log(req.body.name)
+        let machine = await Vm.find({name: req.body.name})
+        console.log(machine)
+        res.status(200).json(machine[0])
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: error })
+        
+    }
+}
+
 // to be made
 // password change
 // add balance
