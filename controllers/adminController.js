@@ -89,6 +89,8 @@ module.exports.machinedata = async (req, res)=>{
     }
 }
 
+
+
 module.exports.userdata = async (req, res)=>{
     try {
         let customersbalance = 0;
