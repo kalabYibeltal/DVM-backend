@@ -12,5 +12,6 @@ router.post('/restockitem_post', vmController.restockitem_post)
 router.post('/machinelogin', vmController.machinelogin)
 router.get('/getall', vmController.getall)
 router.post('/getone', vmController.getone)
+router.post('/edititem', vmController.edititem)
 
 module.exports = router

@@ -61,6 +61,18 @@ module.exports.restockitem_post = async (req, res)=>{
     .catch((err)=>console.log(err))
 }
 
+module.exports.edititem = async (req, res)=>{
+  
+    var machines = await  Vm.find({name: req.body.message[3]})
+    var machine = machines[0];
+
+    machine.items.set(req.body.message[0], {price: Number(req.body.message[2]), stock: Number(req.body.message[1])} )
+
+    Vm.findByIdAndUpdate(machine.id, {items:  machine.items })
+    .then(()=>res.status(201).json({message: "success"}))
+    .catch((err)=>console.log(err))
+}
+
 module.exports.machinelogin = async (req, res)=>{
     const {name} = req.body
 
@@ -107,6 +119,7 @@ module.exports.getone = async (req, res)=>{
         
     }
 }
+
 
 // to be made
 // password change
