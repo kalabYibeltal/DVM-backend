@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser')
 const userRoutes = require('./routes/userRoutes')
 const vmRoutes = require('./routes/vmRoutes')
 const adminRoutes = require('./routes/adminRoutes')
+const fbRoutes = require('./routes/fbRoutes')
+const buildRoutes = require('./routes/buildRoutes')
 
 
 
@@ -24,7 +26,6 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 	.catch((err) => console.log(err))
 
 app.listen(3000)
-
 //middleware and static fields
 app.use(morgan('dev'))
 app.use(express.json());
@@ -35,5 +36,7 @@ app.get('/isconnected', (req, res) => res.status(200).json({ msg: "server online
 app.use(userRoutes)
 app.use('/vmachine', vmRoutes)
 app.use('/admin', adminRoutes)
+app.use('/feedback', fbRoutes)
+app.use('/build', buildRoutes)
 
 app.use((req, res) => res.status(400).json({ msg: "wrong endpoint" }))

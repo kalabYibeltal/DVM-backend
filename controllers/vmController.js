@@ -1,5 +1,6 @@
 const Vm = require('../models/vmachine')
 const jwt = require('jsonwebtoken')
+const User = require('../models/user')
 
 const maxAge = 3 * 24 * 60 * 60
 const createToken = (id)=>{
@@ -31,18 +32,25 @@ module.exports.createmachine_post = async (req, res)=>{
 
 module.exports.buyitem_post = async (req, res)=>{
     const {machineid, itemname} = req.body
+    const userid = "6484c9f1ad2555ad737d9e06";
     var machine = await Vm.findById(machineid)
     const stock = "stock";
     const price = "price";
-    //{_id, name, numberofitems, uitems} 
-     
-    // console.log(machine.items.get(itemname)?.stock)
+    console.log(machineid)
 
+    const user = await User.findById(userid);
+
+    var history = user.history
+    const p = machine.items.get(itemname)?.price
+    history.push([itemname, `${p.toString()} br` ])
+
+    console.log(history)
     machine.items.set(itemname, {price: machine.items.get(itemname)?.price, stock: machine.items.get(itemname)?.stock -1} )
 
     machine.income = machine.income + machine.items.get(itemname)?.price
-    // console.log(machine.items)
-  
+   
+    User.findByIdAndUpdate(userid, {history: history}).then(()=>res.status(201).json({message: "success"}))
+    .catch((err)=>console.log(err))
 
     Vm.findByIdAndUpdate(machineid, {items:  machine.items, income:machine.income })
     .then(()=>res.status(201).json({message: "success"}))

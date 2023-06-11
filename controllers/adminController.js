@@ -62,7 +62,9 @@ module.exports.adminlogin_post = async (req, res)=>{
         const token = createToken(admin._id)
 
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+
         res.status(200).json({ token: token, admin: admin})
+
     }catch(err){
         console.log(err)
         const errors = handleErrors(err)
@@ -90,7 +92,6 @@ module.exports.machinedata = async (req, res)=>{
 }
 
 
-
 module.exports.userdata = async (req, res)=>{
     try {
         let customersbalance = 0;
@@ -108,5 +109,33 @@ module.exports.userdata = async (req, res)=>{
         console.log(error)
         res.status(400).json({ error: error })
         
+    }
+}
+
+module.exports.verify = async (req, res)=>{
+    try {
+     
+        const token = req.headers.token || req.cookies.token 
+        
+
+        if (!token) {
+            return res.status(401).json({ message: 'Unauthorized' })
+        }
+        const decoded = jwt.verify(token, 'machine secret')
+        
+        const user = await Admin.findById(decoded.id)
+        
+        console.log(user)
+        if (!user) {
+            res.clearCookie("token")
+            return res.status(402).json({ message: 'Unauthorized' })
+        }
+
+        req.body.user = user
+        console.log(user)
+        return res.status(200).json({ message: "User verified", user })
+
+    } catch (error) {
+        return res.status(500).json({ message: "Unknown error occured" })
     }
 }

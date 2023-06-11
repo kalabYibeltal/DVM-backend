@@ -38,13 +38,13 @@ const createToken = (id)=>{
 }
 
 module.exports.signup_post = async (req, res)=>{
-    const {name,email, password, phoneNumber} = req.body;
+    const {name,email, password, phoneNumber, history} = req.body;
     // initialize with zero balance
     const balance = 0;
     
     try{
-        const user = await User.create({name, email, password, phoneNumber, balance})
-        res.status(201).json({ user: user })
+        const user = await User.create({name, email, password, phoneNumber, balance, history})
+        res.status(201).json({ user })
 
     }catch(err){
         const errors = handleErrors(err)
@@ -81,10 +81,28 @@ module.exports.balance_post = (req, res) =>{
         .catch((err)=>console.log("error"))
 }
 
+module.exports.history = (req, res) =>{
+    const id = req.body.id
+    User.findById(id)
+        .then((result)=>{
+            var sum = 0;
+            for (const arr of result.history){
+                let parts = arr[1].split(' '); // Split the string by spaces
+                let number = parseInt(parts[0]);
+                sum += number
+            }
+            var array = [["total", `${sum.toString()} br`]]
+            let rest = array.concat(result.history);
+
+            res.status(201).json(rest)
+            
+        })
+        .catch((err)=>console.log(err))
+}
 
 module.exports.updatebalance_post = async (req, res)=>{
     const {userid, newbalance} = req.body
-    // const user = await findById(userid)
+  
 
     User.findByIdAndUpdate(userid, {balance: newbalance})
     .then(()=>res.status(201).json({message: "success"}))
