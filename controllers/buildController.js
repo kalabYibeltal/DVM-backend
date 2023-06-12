@@ -27,7 +27,7 @@ module.exports.getall = async (req, res)=>{
 }
 
 module.exports.getshort = async (req, res)=>{
-    console.log("here")
+    // console.log("here")
     const {lon, lat} = req.body;
     try {
         let build = await Build.find({})

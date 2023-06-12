@@ -2,6 +2,7 @@ const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 const { findById } = require('../models/vmachine')
 
+
 //handle errors
 const handleErrors = (err)=>{
 
@@ -71,7 +72,6 @@ module.exports.login_post = async (req, res)=>{
 }
 
 
-
 module.exports.balance_post = (req, res) =>{
     const id = req.body.id
     User.findById(id)
@@ -81,7 +81,7 @@ module.exports.balance_post = (req, res) =>{
         .catch((err)=>console.log("error"))
 }
 
-module.exports.history = (req, res) =>{
+module.exports.history = (req, res) =>{f
     const id = req.body.id
     User.findById(id)
         .then((result)=>{
@@ -96,7 +96,7 @@ module.exports.history = (req, res) =>{
 
             res.status(201).json(rest)
             
-        })
+        })  
         .catch((err)=>console.log(err))
 }
 

@@ -1,9 +1,12 @@
 const fb = require('../models/feedback')
 const jwt = require('jsonwebtoken')
 const { Configuration, OpenAIApi } = require('openai');
+const dotenv = require('dotenv');
+dotenv.config()
+
 
 const config = new Configuration({
-	apiKey: "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",
+	apiKey: process.env.id,
 })
 
 const openai = new OpenAIApi(config)
@@ -37,6 +40,7 @@ module.exports.getall = async (req, res)=>{
 
 module.exports.getaverage = async (req, res)=>{
     try {
+        // console.log("the process is",process.env.id)
         let feedbacks = await fb.find({})
         let average = 0
         let text = ""
@@ -49,7 +53,8 @@ module.exports.getaverage = async (req, res)=>{
         const response = await openai.createCompletion({
             model: 'text-davinci-003',
             prompt: `summarize the text in the triple quotes into one sentence before you give me the sentence make sure the senterce
-            is a formal sentence and the sentence can be maximum of 30 words: """ ${text} """`,
+            is a formal full sentence and the sentence can be maximum of 60 words, check again the sentence is a complete sentence before
+            giving me you'r response: """ ${text} """`,
         })
         
         const data = response.data.choices[0].text;
@@ -58,7 +63,7 @@ module.exports.getaverage = async (req, res)=>{
         res.status(200).json({ average: average / feedbacks.length , feedbacks:  response.data.choices[0].text.replace(/\n/g, '').replace(/\\/g, '') })
 
     } catch (error) {
-        res.status(400).json({ error: error })
+        res.status(400).json({ error })
         
     }
 }
