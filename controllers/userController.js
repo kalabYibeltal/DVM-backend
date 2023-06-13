@@ -81,7 +81,7 @@ module.exports.balance_post = (req, res) =>{
         .catch((err)=>console.log("error"))
 }
 
-module.exports.history = (req, res) =>{f
+module.exports.history = (req, res) =>{
     const id = req.body.id
     User.findById(id)
         .then((result)=>{
